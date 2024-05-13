@@ -47,7 +47,11 @@ const plugins = [
     resolve: `@medusajs/file-local`,
     options: {
       upload_dir: "uploads",
+<<<<<<< HEAD
       backend_url: 'https://csc-backend-app-htwvc.ondigitalocean.app'
+=======
+      backend_url: "https://csc-backend-app-htwvc.ondigitalocean.app"
+>>>>>>> 451cf198880a8aeeb12b3feb3528a579e85e7170
     },
   },
   {
