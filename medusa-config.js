@@ -58,8 +58,6 @@ const plugins = [
       develop: {
         open: process.env.OPEN_BROWSER !== "false",
       },
-      // serve: false,
-      // backend: "http://localhost:5000"
     },
   },
   {
@@ -93,7 +91,25 @@ const plugins = [
       },
     },
   },
-
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
+    }
+  },
+  {
+    resolve: `@rsc-labs/medusa-store-analytics`,
+    options: {
+      enableUI: true
+    }
+  },
+  {
+    resolve: `medusa-plugin-dashboard`,
+    options: {
+      enableUI: true,
+    }
+  },
 ];
 
 const modules = {
@@ -118,8 +134,6 @@ const projectConfig = {
   store_cors: STORE_CORS,
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
-  database_extra: { ssl: { rejectUnauthorized: false } },
-  redis_url: process.env.REDIS_URL,
   // Uncomment the following lines to enable REDIS
   // redis_url: REDIS_URL
 };
