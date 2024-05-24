@@ -19,7 +19,7 @@ switch (process.env.NODE_ENV) {
 
 try {
   dotenv.config({ path: process.cwd() + "/" + ENV_FILE_NAME });
-} catch (e) { }
+} catch (e) {}
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
@@ -28,15 +28,15 @@ const ADMIN_CORS =
 // CORS to avoid issues when consuming Medusa from a client
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 
-const DB_USERNAME = process.env.DB_USERNAME
-const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_HOST = process.env.DB_HOST
-const DB_PORT = process.env.DB_PORT
-const DB_DATABASE = process.env.DB_DATABASE
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_HOST = process.env.DB_HOST;
+const DB_PORT = process.env.DB_PORT;
+const DB_DATABASE = process.env.DB_DATABASE;
 
 const DATABASE_URL =
   `postgres://${DB_USERNAME}:${DB_PASSWORD}` +
-  `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
+  `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
@@ -47,7 +47,7 @@ const plugins = [
     resolve: `@medusajs/file-local`,
     options: {
       upload_dir: "uploads",
-      backend_url: 'https://csc-backend-app-htwvc.ondigitalocean.app'
+      backend_url: "https://csc-backend-app-htwvc.ondigitalocean.app",
     },
   },
   {
@@ -72,11 +72,7 @@ const plugins = [
       settings: {
         products: {
           indexSettings: {
-            searchableAttributes: [
-              "title",
-              "description",
-              "variant_sku",
-            ],
+            searchableAttributes: ["title", "description", "variant_sku"],
             displayedAttributes: [
               "id",
               "title",
@@ -96,19 +92,34 @@ const plugins = [
     options: {
       api_key: process.env.STRIPE_API_KEY,
       webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
-    }
+    },
   },
   {
     resolve: `@rsc-labs/medusa-store-analytics`,
     options: {
-      enableUI: true
-    }
+      enableUI: true,
+    },
   },
   {
     resolve: `medusa-plugin-dashboard`,
     options: {
       enableUI: true,
-    }
+    },
+  },
+  {
+    resolve: `medusa-plugin-ratings`,
+    options: {
+      enableUI: true,
+    },
+  },
+  {
+    resolve: `medusa-payment-paypal`,
+    options: {
+      sandbox: process.env.PAYPAL_SANDBOX,
+      clientId: process.env.PAYPAL_CLIENT_ID,
+      clientSecret: process.env.PAYPAL_CLIENT_SECRET,
+      authWebhookId: process.env.PAYPAL_AUTH_WEBHOOK_ID,
+    },
   },
 ];
 
